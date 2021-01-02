@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
@@ -32,7 +32,31 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
-        print("Please select an image")
+        let imagePickerController = UIImagePickerController()
+        
+        imagePickerController.sourceType = .photoLibrary
+        
+        imagePickerController.delegate = self
+        
+        self.present(imagePickerController, animated: true, completion: nil)
+
+
+
+    }
+    
+    // MARK: - Image Picker
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+        
+        photoImageView.image = selectedImage
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
