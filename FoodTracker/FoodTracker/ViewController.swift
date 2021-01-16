@@ -46,5 +46,20 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         mealNameLabel.text = textField.text
     }
     
+    
+    // MARK: - ImagePickerDelegate
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        guard let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            fatalError("Expected a dictionary containing an image")
+        }
+        
+        photoImageView.image = selectedImage
+        
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
 }
 
