@@ -7,18 +7,43 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var mealNameLabel: UILabel!
+    @IBOutlet weak var photoImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        nameTextField.delegate = self
+    }
+    
+    @IBAction func setDefaultTextLabel(_ sender: Any) {
+        self.mealNameLabel.text = "Default Text"
+    }
+    
+    @IBAction func selectImageAction(_ sender: Any) {
+        let imagePickerController = UIImagePickerController()
+        
+        imagePickerController.sourceType = .photoLibrary
+        
+        imagePickerController.delegate = self
+        
+        self.present(imagePickerController, animated: true, completion: nil)
+        
+        
     }
 
-    @IBAction func setDefaultLabelText(_ sender: Any) {
-        self.mealNameLabel.text = "Default Text"
+    
+    // MARK: - UITextField Delegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        mealNameLabel.text = textField.text
     }
     
 }
