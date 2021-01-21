@@ -34,17 +34,17 @@
                                         <rect key="frame" x="0.0" y="70.5" width="151" height="30"/>
                                         <state key="normal" title="Set Default Label Text"/>
                                         <connections>
-                                            <action selector="setDefaultLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Ed-YL-cgj"/>
+                                            <action selector="setDefaultTextLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="O1l-lu-ExF"/>
                                         </connections>
                                     </button>
-                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="ZEb-BP-StN">
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="Es2-5y-OWD">
                                         <rect key="frame" x="0.0" y="108.5" width="320" height="320"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="ZEb-BP-StN" secondAttribute="height" multiplier="1:1" id="ogV-F0-VkQ"/>
+                                            <constraint firstAttribute="width" secondItem="Es2-5y-OWD" secondAttribute="height" multiplier="1:1" id="nNh-F9-jJU"/>
                                         </constraints>
                                         <connections>
-                                            <outletCollection property="gestureRecognizers" destination="Hfg-BZ-b1n" appends="YES" id="dYp-tg-2jZ"/>
+                                            <outletCollection property="gestureRecognizers" destination="2zN-4N-tci" appends="YES" id="0EY-sc-UeD"/>
                                         </connections>
                                     </imageView>
                                 </subviews>
@@ -64,13 +64,13 @@
                     <connections>
                         <outlet property="mealNameLabel" destination="TUL-41-M6S" id="wWt-WD-2wy"/>
                         <outlet property="nameTextField" destination="ki3-fX-LdP" id="GI2-d4-YHL"/>
-                        <outlet property="photoImageView" destination="ZEb-BP-StN" id="A2v-yb-JST"/>
+                        <outlet property="photoImageView" destination="Es2-5y-OWD" id="hyr-JF-7dr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Hfg-BZ-b1n">
+                <tapGestureRecognizer id="2zN-4N-tci">
                     <connections>
-                        <action selector="selectImageFromPhotoLibrary:" destination="BYZ-38-t0r" id="2qt-pG-dtG"/>
+                        <action selector="selectImageAction:" destination="BYZ-38-t0r" id="q5I-GD-kK3"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
