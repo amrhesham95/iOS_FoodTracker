@@ -22,13 +22,24 @@ class RatingControl: UIStackView {
 
     // MARK: - Setup Buttons
     private func setupButtons() {
+        
+        // MARK: - Buttons Creations
         let button = UIButton()
         button.backgroundColor = .red
         
+        // MARK: - Constraints
         button.heightAnchor.constraint(equalToConstant: 44.0).isActive = true
         button.widthAnchor.constraint(equalToConstant: 44.0).isActive = true
         
+        // MARK: - Adding Actions
+        button.addTarget(self, action: #selector(RatingControl.ratingButtonTapped(button:)), for: UIControl.Event.touchUpInside)
+        
         addArrangedSubview(button)
         
+    }
+    
+    // MARK - Buttons Actions
+    @objc func ratingButtonTapped(button: UIButton) {
+        print("Button Tapped!")
     }
 }
