@@ -43,11 +43,23 @@ import UIKit
         button.removeFromSuperview()
       }
       ratingButtons.removeAll()
+      
+      // Load Button Images
+      
+      let bundle = Bundle(for: type(of: self))
+      let emptyStar = UIImage(named: "emptyStar", in: bundle, compatibleWith: self.traitCollection)
+      let filledStar = UIImage(named: "filledStar", in: bundle, compatibleWith: self.traitCollection)
+      let highlightedStar = UIImage(named: "highlightedStar", in: bundle, compatibleWith: self.traitCollection)
         
         for _ in 0 ..< starCount {
             // MARK: - Buttons Creations
             let button = UIButton()
-            button.backgroundColor = .red
+            
+          // Set the button images
+          button.setImage(emptyStar, for: .normal)
+          button.setImage(filledStar, for: .selected)
+          button.setImage(highlightedStar, for: .highlighted)
+          button.setImage(highlightedStar, for: [.highlighted, .selected])
             
             // MARK: - Constraints
           button.heightAnchor.constraint(equalToConstant: starSize.height).isActive = true
