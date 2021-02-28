@@ -22,7 +22,11 @@ import UIKit
     }
   }
     
-    var rating = 0
+  var rating = 0 {
+    didSet {
+      updateButtonSelectionStates()
+    }
+  }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -73,10 +77,32 @@ import UIKit
             
 
         }
+      updateButtonSelectionStates()
     }
     
     // MARK - Buttons Actions
     @objc func ratingButtonTapped(button: UIButton) {
-        print("Button Tapped!")
+        // call new method
+      guard let index = ratingButtons.firstIndex(of: button) else {
+        fatalError("Thte button, \(button), is not in the ratingButton Array")
+      }
+      
+      let selectedRating = index + 1
+      
+      if selectedRating == rating {
+        rating = 0
+      } else {
+        rating = selectedRating
+      }
     }
+}
+
+// MARK: - Helpers
+//
+private extension RatingControl {
+  func updateButtonSelectionStates() {
+    for (index, button) in ratingButtons.enumerated() {
+      button.isSelected = index < rating
+    }
+  }
 }
