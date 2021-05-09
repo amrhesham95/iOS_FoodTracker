@@ -93,6 +93,18 @@ class MealsTableViewController: UITableViewController {
 
 }
 
+// MARK: - Segue
+//
+extension MealsTableViewController {
+  @IBAction func unwindToMealsVC(_ sender: UIStoryboardSegue) {
+    if let mealVC = sender.source as? MealViewController {
+      guard let meal = mealVC.meal else { return }
+      meals.append(meal)
+      tableView.reloadData()
+    }
+  }
+}
+
 // MARK: - Private Methods
 //
 private extension MealsTableViewController {

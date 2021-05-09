@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MealViewController.swift
 //  FoodTracker
 //
 //  Created by Amr Hesham on 19/12/2020.
@@ -7,16 +7,37 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+  // MARK: - Outlets
+  
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var photoImageView: UIImageView!
   @IBOutlet weak var ratingControl: RatingControl!
+  @IBOutlet weak var saveButton: UIBarButtonItem!
+  
+  // MARK: - Properties
+  
+  var meal: Meal?
   
     override func viewDidLoad() {
         super.viewDidLoad()
         nameTextField.delegate = self
     }
+  
+  // MARK: - Navigation
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    super.prepare(for: segue, sender: sender)
+    
+    guard let button = sender as? UIBarButtonItem, button == saveButton else { return }
+    
+    let name = nameTextField.text ?? ""
+    let photo = photoImageView.image
+    let rating = ratingControl.rating
+    
+    meal = Meal(name: name, photo: photo, rating: rating)
+  }
   
     @IBAction func selectImageAction(_ sender: Any) {
         let imagePickerController = UIImagePickerController()
