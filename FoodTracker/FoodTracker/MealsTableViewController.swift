@@ -16,7 +16,8 @@ class MealsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        loadSampleMeals()
+//        loadSampleMeals()
+        loadMeals()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -100,7 +101,8 @@ extension MealsTableViewController {
     if let mealVC = sender.source as? MealViewController {
       guard let meal = mealVC.meal else { return }
       meals.append(meal)
-      tableView.reloadData()
+      saveMeals()
+      loadMeals()
     }
   }
 }
@@ -122,5 +124,34 @@ private extension MealsTableViewController {
     
     // appending the meals
     meals += [meal1, meal2, meal3]
+  }
+}
+
+extension MealsTableViewController {
+  func saveMeals() {
+    let data = try! NSKeyedArchiver.archivedData(withRootObject: meals, requiringSecureCoding: false)
+    
+    let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("meals")
+    
+    try! data.write(to: path)
+  }
+  
+  func loadMeals() {
+    let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("meals")
+    
+    do {
+      let data = try Data(contentsOf: path)
+      
+      do {
+        if let loadedMeals = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Meal] {
+          meals.removeAll()
+          meals.append(contentsOf: loadedMeals)
+          tableView.reloadData()
+        }
+      }
+      
+    } catch {
+      print(error.localizedDescription)
+    }
   }
 }
